@@ -1,0 +1,15 @@
+#search::placeholder {
+  color: var(--bs-secondary);
+}
+
+.card {
+  width: 25rem;
+}
+
+.card-body {
+  height: 7rem;
+}
+
+.card-title:hover {
+  color: var(--bs-info);
+}

@@ -1,0 +1,72 @@
+<div class="container py-3 mt-5">
+    <div class="col-lg-6 mt-5">
+        <h1 class="fw-bold text-uppercase text-info">More information about you</h1>
+        <p class="h5 mt-3"><small class="text-body-secondary">You personal details can help us to provide better
+                support.</small></p>
+        <form action="" class="mt-5 needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="inputDateOfBirth" class="form-label">Date of birth<span class="text-danger">
+                        *</span></label>
+                <input type="date" class="form-control form-control-lg" id="inputDateOfBirth" placeholder="">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please enter your date of birth.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="inputGender" class="form-label">Gender<span class="text-danger">
+                        *</span></label>
+                <select class="form-select form-select-lg" id="inputGender" required>
+                    <option selected disabled value="">Choose...</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
+                <div class="invalid-feedback">Please choose your gender</div>
+            </div>
+            <div class="mb-3">
+                <label for="inputPhone" class="form-label">Phone number<span class="text-danger">
+                        *</span></label>
+                <div class="input-group input-group-lg has-validation">
+                    <span class="input-group-text" id="inputGroupPrepend">+20</span>
+                    <input type="tel" class="form-control" id="inputPhone" aria-describedby="inputGroupPrepend"
+                        required>
+                    <div class="invalid-feedback">
+                        Please enter your phone number.
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="inputPhone" class="form-label">Choose a photo</label>
+                <input type="file" class="form-control form-control-lg" aria-label="photo">
+            </div>
+            <div class="mb-5">
+                <label for="inputStartUni" class="form-label">When are you planning to start uni?<span
+                        class="text-danger">
+                        *</span></label>
+
+                <div class="d-flex" id="inputStartUni">
+                    <input type="radio" class="btn-check" name="options-base" id="option1" autocomplete="off" checked>
+                    <label class="btn rounded-pill" for="option1">2024</label>
+
+                    <input type="radio" class="btn-check" name="options-base" id="option2" autocomplete="off">
+                    <label class="btn rounded-pill" for="option2">2025</label>
+
+                    <input type="radio" class="btn-check" name="options-base" id="option3" autocomplete="off">
+                    <label class="btn rounded-pill" for="option3">2026</label>
+
+                    <input type="radio" class="btn-check" name="options-base" id="option4" autocomplete="off">
+                    <label class="btn rounded-pill" for="option4">2027</label>
+
+                    <input type="radio" class="btn-check" name="options-base" id="option5" autocomplete="off">
+                    <label class="btn rounded-pill" for="option5">2028</label>
+                </div>
+            </div>
+            <div class="d-flex">
+                <button type="button" class="btn btn-info text-white">Previous</button>
+                <button type="submit" class="btn btn-info text-white ms-auto">Next</button>
+            </div>
+        </form>
+    </div>
+</div>

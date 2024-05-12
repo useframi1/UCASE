@@ -1,0 +1,17 @@
+.nav-underline {
+  --bs-nav-underline-link-active-color: var(--bs-info);
+  --bs-nav-link-color: black;
+}
+
+.tab-content {
+  height: 35rem;
+}
+
+#nav-underline-favorites {
+  --bs-nav-underline-link-active-color: var(--bs-info);
+  --bs-nav-link-color: black;
+}
+
+.uni-name:hover {
+  color: var(--bs-info);
+}

@@ -1,0 +1,41 @@
+.home-body {
+  height: 100vh;
+}
+
+.image-container {
+  height: 75%;
+}
+
+.image-container img {
+  object-fit: cover;
+}
+
+.img-fluid {
+  opacity: 0.25;
+}
+
+#nav-underline-search {
+  --bs-nav-underline-link-active-color: white;
+  --bs-nav-link-color: var(--bs-info);
+}
+
+#form-1::placeholder {
+  color: var(--bs-secondary);
+}
+
+#form-2::placeholder {
+  color: var(--bs-secondary);
+}
+
+#nav-underline-recommend {
+  --bs-nav-underline-link-active-color: white;
+  --bs-nav-link-color: var(--bs-info);
+}
+
+#recommendation {
+  height: 30rem;
+}
+
+.card-title:hover {
+  color: var(--bs-info);
+}

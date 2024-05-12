@@ -1,0 +1,49 @@
+<nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary" id="topNavbar">
+    <div class="container-fluid">
+        <a class="navbar-brand" routerLink="/" routerLinkActive="active">UCASE</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav ms-0 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/universities" routerLinkActive="active">Universities</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ms-0 mb-2 mb-lg-0" *ngIf="accountService.currentUser$ | async">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/hub" routerLinkActive="active">My Hub</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/application" routerLinkActive="active">My Application</a>
+                </li>
+            </ul>
+
+            <div class="d-lg-none border-top my-2"></div>
+
+            <ul class="navbar-nav ms-auto" *ngIf="(accountService.currentUser$ | async) as user">
+                <li class="nav-item dropdown" dropdown>
+                    <a class="nav-link dropdown-toggle" role="button" aria-expanded="false" dropdownToggle>
+                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle"
+                            width="30" /> Welcome, <span class="text-capitalize">{{user.firstName}}</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right" *dropdownMenu>
+                        <li><a class="dropdown-item">Edit Profile</a></li>
+                        <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ms-auto" *ngIf="!(accountService.currentUser$ | async)">
+                <li class="nav-item"><a class="nav-link" routerLink="/login" routerLinkActive="active"><i
+                            class="fa fa-sign-in"></i> Login</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" routerLink="/register" routerLinkActive="active"><i
+                            class="fa fa-user-plus"></i>
+                        Register</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
