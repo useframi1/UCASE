@@ -57,7 +57,6 @@ CREATE TABLE IF NOT EXISTS Users
     Gender CHAR(1),
     Gov_Name VARCHAR(200),
     Area VARCHAR(200),
-	FOREIGN KEY (Gov_Name, Area) REFERENCES Governorate(Gov_Name, Area)
     ON UPDATE CASCADE
     ON DELETE SET NULL
 );

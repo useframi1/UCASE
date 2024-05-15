@@ -1,0 +1,10 @@
+<div class="mb-3">
+    <label for="input{{label}}" class="form-label">{{label}}<span class="text-danger">
+            *</span></label>
+    <input type="text" [class.is-invalid]="control.touched && control.invalid" class="form-control form-control-lg"
+        [formControl]="control" id="input{{label}}" bsDatepicker [bsConfig]="bsConfig" [maxDate]="maxDate"
+        autocomplete="off">
+    <div class="invalid-feedback" *ngIf="control.errors?.['required']">
+        {{label}} field is required
+    </div>
+</div>

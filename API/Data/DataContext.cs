@@ -199,11 +199,7 @@ public partial class DataContext : DbContext
                 .HasMaxLength(11)
                 .IsFixedLength()
                 .HasColumnName("phoneno");
-
-            entity.HasOne(d => d.Governorate).WithMany(p => p.Users)
-                .HasForeignKey(d => new { d.GovName, d.Area })
-                .OnDelete(DeleteBehavior.SetNull)
-                .HasConstraintName("users_gov_name_area_fkey");
+            entity.Property(e => e.StartUni).HasColumnName("startUni");
         });
 
         OnModelCreatingPartial(modelBuilder);

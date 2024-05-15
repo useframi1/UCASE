@@ -238,3 +238,6 @@
 /Users/youssef/Documents/Spring-2024/Software-Engineering/UCASE/API/obj/Debug/net8.0/API.csproj.CopyComplete
 /Users/youssef/Documents/Spring-2024/Software-Engineering/UCASE/API/obj/Debug/net8.0/API.genruntimeconfig.cache
 /Users/youssef/Documents/Spring-2024/Software-Engineering/UCASE/API/obj/Debug/net8.0/ref/API.dll
+/Users/youssef/Documents/Spring-2024/Software-Engineering/UCASE/API/obj/Debug/net8.0/API.sourcelink.json
+/Users/youssef/Documents/Spring-2024/Software-Engineering/UCASE/API/bin/Debug/net8.0/AutoMapper.dll
+/Users/youssef/Documents/Spring-2024/Software-Engineering/UCASE/API/bin/Debug/net8.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll

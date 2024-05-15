@@ -1,71 +1,62 @@
 <div class="container py-3 mt-5">
-    <div class="col-lg-6 mt-5">
+    <div class="col-lg-6 my-5">
         <h1 class="fw-bold text-uppercase text-info">More information about you</h1>
         <p class="h5 mt-3"><small class="text-body-secondary">You personal details can help us to provide better
                 support.</small></p>
-        <form action="" class="mt-5 needs-validation" novalidate>
+        <form [formGroup]="detailsForm" (ngSubmit)="submitDetails()" class="mt-5 needs-validation">
+            <app-date-picker [formControl]="$any(detailsForm.controls['dob'])" [label]="'Date of Birth'"
+                [maxDate]="maxDate"></app-date-picker>
             <div class="mb-3">
-                <label for="inputDateOfBirth" class="form-label">Date of birth<span class="text-danger">
-                        *</span></label>
-                <input type="date" class="form-control form-control-lg" id="inputDateOfBirth" placeholder="">
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
-                <div class="invalid-feedback">
-                    Please enter your date of birth.
-                </div>
-            </div>
-            <div class="mb-3">
-                <label for="inputGender" class="form-label">Gender<span class="text-danger">
-                        *</span></label>
-                <select class="form-select form-select-lg" id="inputGender" required>
-                    <option selected disabled value="">Choose...</option>
-                    <option>Male</option>
-                    <option>Female</option>
-                </select>
-                <div class="invalid-feedback">Please choose your gender</div>
-            </div>
-            <div class="mb-3">
-                <label for="inputPhone" class="form-label">Phone number<span class="text-danger">
-                        *</span></label>
-                <div class="input-group input-group-lg has-validation">
-                    <span class="input-group-text" id="inputGroupPrepend">+20</span>
-                    <input type="tel" class="form-control" id="inputPhone" aria-describedby="inputGroupPrepend"
-                        required>
-                    <div class="invalid-feedback">
-                        Please enter your phone number.
-                    </div>
+                <label for="inputGender" class="form-label">Gender</label>
+                <div class="d-flex" id="inputGender">
+                    <input type="radio" class="btn-check" value="Male" id="optionMale" formControlName="gender">
+                    <label class="btn rounded-pill" for="optionMale">Male</label>
+
+                    <input type="radio" class="btn-check" value="Female" id="optionFemale" formControlName="gender">
+                    <label class="btn rounded-pill" for="optionFemale">Female</label>
                 </div>
             </div>
+            <app-text-input [formControl]="$any(detailsForm.controls['phoneno'])" [label]="'Phone Number'"
+                [type]="'tel'"></app-text-input>
+            <div class="mb-3">
+                <label for="inputNationality" class="form-label">Nationality</label>
+                <div class="d-flex" id="inputNationality">
+                    <input type="radio" class="btn-check" value="Egyptian" id="optionEgyptian"
+                        formControlName="nationality">
+                    <label class="btn rounded-pill" for="optionEgyptian">Egyptian</label>
+
+                    <input type="radio" class="btn-check" value="Foreign" id="optionForeign"
+                        formControlName="nationality">
+                    <label class="btn rounded-pill" for="optionForeign">Foreign</label>
+                </div>
+            </div>
+            <!--
             <div class="mb-3">
                 <label for="inputPhone" class="form-label">Choose a photo</label>
                 <input type="file" class="form-control form-control-lg" aria-label="photo">
-            </div>
-            <div class="mb-5">
-                <label for="inputStartUni" class="form-label">When are you planning to start uni?<span
-                        class="text-danger">
-                        *</span></label>
+            </div> -->
+            <div class="mb-3">
+                <label for="inputStartUni" class="form-label">When are you planning to start uni?</label>
 
                 <div class="d-flex" id="inputStartUni">
-                    <input type="radio" class="btn-check" name="options-base" id="option1" autocomplete="off" checked>
+                    <input type="radio" class="btn-check" value="2024" id="option1" formControlName="startUni">
                     <label class="btn rounded-pill" for="option1">2024</label>
 
-                    <input type="radio" class="btn-check" name="options-base" id="option2" autocomplete="off">
+                    <input type="radio" class="btn-check" value="2025" id="option2" formControlName="startUni">
                     <label class="btn rounded-pill" for="option2">2025</label>
 
-                    <input type="radio" class="btn-check" name="options-base" id="option3" autocomplete="off">
+                    <input type="radio" class="btn-check" value="2026" id="option3" formControlName="startUni">
                     <label class="btn rounded-pill" for="option3">2026</label>
 
-                    <input type="radio" class="btn-check" name="options-base" id="option4" autocomplete="off">
+                    <input type="radio" class="btn-check" value="2027" id="option4" formControlName="startUni">
                     <label class="btn rounded-pill" for="option4">2027</label>
 
-                    <input type="radio" class="btn-check" name="options-base" id="option5" autocomplete="off">
+                    <input type="radio" class="btn-check" value="2028" id="option5" formControlName="startUni">
                     <label class="btn rounded-pill" for="option5">2028</label>
                 </div>
             </div>
-            <div class="d-flex">
-                <button type="button" class="btn btn-info text-white">Previous</button>
-                <button type="submit" class="btn btn-info text-white ms-auto">Next</button>
+            <div class="text-end">
+                <button [disabled]="!detailsForm.valid" type="submit" class="btn btn-info text-white">Next</button>
             </div>
         </form>
     </div>

@@ -31,9 +31,9 @@ public partial class User
 
     public string Area { get; set; }
 
-    public virtual ICollection<FavoriteUniversity> FavoriteUniversities { get; set; } = new List<FavoriteUniversity>();
+    public int? StartUni { get; set; }
 
-    public virtual Governorate Governorate { get; set; }
+    public virtual ICollection<FavoriteUniversity> FavoriteUniversities { get; set; } = new List<FavoriteUniversity>();
 
     public virtual ICollection<PreferredIndustry> PreferredIndustries { get; set; } = new List<PreferredIndustry>();
 

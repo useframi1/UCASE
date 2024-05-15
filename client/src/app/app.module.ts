@@ -17,11 +17,13 @@ import { ApplicationComponent } from './application/application.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UniversityDetailComponent } from './universities/university-detail/university-detail.component';
 import { UniversityListComponent } from './universities/university-list/university-list.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './_modules/shared.module';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { TextInputComponent } from './_forms/text-input/text-input.component';
+import { DatePickerComponent } from './_forms/date-picker/date-picker.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
     UniversityListComponent,
     NotFoundComponent,
     ServerErrorComponent,
+    TextInputComponent,
+    DatePickerComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +51,7 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     SharedModule,
   ],
   providers: [

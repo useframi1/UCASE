@@ -10,6 +10,4 @@ public partial class Governorate
     public string Area { get; set; }
 
     public virtual ICollection<University> Universities { get; set; } = new List<University>();
-
-    public virtual ICollection<User> Users { get; set; } = new List<User>();
 }
