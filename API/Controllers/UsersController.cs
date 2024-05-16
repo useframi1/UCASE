@@ -13,12 +13,10 @@ namespace API.Controllers;
 public class UsersController : BaseApiController
 {
     private readonly IUserRepository _userRepository;
-    private readonly IMapper _mapper;
 
-    public UsersController(IUserRepository userRepository, IMapper mapper)
+    public UsersController(IUserRepository userRepository)
     {
         _userRepository = userRepository;
-        _mapper = mapper;
     }
 
     [HttpGet]
@@ -35,7 +33,6 @@ public class UsersController : BaseApiController
         return await _userRepository.GetMemberAsync(email);
     }
 
-    [AllowAnonymous]
     [HttpPut("updateDetails")]
     public async Task<ActionResult<bool>> UpdateUserDetails(DetailsDto detailsDto)
     {
@@ -43,9 +40,24 @@ public class UsersController : BaseApiController
 
         user.Dob = detailsDto.Dob;
         user.Gender = detailsDto.Gender;
-        user.Phoneno = detailsDto.Phoneno;
+        user.PhoneNo = detailsDto.PhoneNo;
         user.Nationality = detailsDto.Nationality;
         user.StartUni = detailsDto.StartUni;
+
+        _userRepository.Update(user);
+
+        return await _userRepository.SaveAllAsync();
+    }
+
+    [HttpPut("updateAddress")]
+    public async Task<ActionResult<bool>> UpdateUserAddress(AddressDto addressDto)
+    {
+        var user = await _userRepository.GetUserByEmailAsync(addressDto.Email);
+
+        user.GovName = addressDto.GovName;
+        user.Area = addressDto.Area;
+        user.AddressLine1 = addressDto.AddressLine1;
+        user.AddressLine2 = addressDto.AddressLine2;
 
         _userRepository.Update(user);
 

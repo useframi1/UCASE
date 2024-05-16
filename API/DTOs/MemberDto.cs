@@ -9,11 +9,11 @@ public class MemberDto
 
     public DateOnly? Dob { get; set; }
 
-    public string Phoneno { get; set; }
+    public string PhoneNo { get; set; }
 
-    public string Addressline1 { get; set; }
+    public string AddressLine1 { get; set; }
 
-    public string Addressline2 { get; set; }
+    public string AddressLine2 { get; set; }
 
     public string Nationality { get; set; }
 

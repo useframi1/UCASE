@@ -33,8 +33,8 @@ public class AccountController : BaseApiController
         using var hmac = new HMACSHA512();
 
         user.Email = registerDto.Email.ToLower();
-        user.Passwordhash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
-        user.Passwordsalt = hmac.Key;
+        user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
+        user.PasswordSalt = hmac.Key;
 
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
@@ -55,13 +55,13 @@ public class AccountController : BaseApiController
 
         if (user == null) return Unauthorized("Invalid email");
 
-        using var hmac = new HMACSHA512(user.Passwordsalt);
+        using var hmac = new HMACSHA512(user.PasswordSalt);
 
         var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
 
         for (int i = 0; i < computedHash.Length; i++)
         {
-            if (computedHash[i] != user.Passwordhash[i]) return Unauthorized("Invalid password");
+            if (computedHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid password");
         }
 
         return new UserDto

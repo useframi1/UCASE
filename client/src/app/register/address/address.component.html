@@ -3,56 +3,18 @@
         <h1 class="fw-bold text-uppercase text-info">where do you live?</h1>
         <p class="h5 mt-3"><small class="text-body-secondary">This helps us to give you the right support based on
                 you location.</small></p>
-        <form action="" class="mt-5 needs-validation" novalidate>
-            <div class="mb-3">
-
-            </div>
-            <div class="mb-3">
-                <label for="inputGovernorate" class="form-label">Governorate<span class="text-danger">
-                        *</span></label>
-                <select class="form-select form-select-lg" id="inputGovernorate" required>
-                    <option selected disabled value="">Choose governorate...</option>
-                    <option>Cairo</option>
-                    <option>Alexandria</option>
-                    <option>Giza</option>
-                    <option>...</option>
-                </select>
-                <div class="invalid-feedback">
-                    Please enter the governorate you live in.
-                </div>
-            </div>
-            <div class="mb-3">
-                <label for="inputArea" class="form-label">Area<span class="text-danger">
-                        *</span></label>
-                <select class="form-select form-select-lg" id="inputArea" required>
-                    <option selected disabled value="">Choose area...</option>
-                    <option>New Cairo</option>
-                    <option>Sheikh Zayed</option>
-                    <option>Nasr City</option>
-                    <option>...</option>
-                </select>
-                <div class="invalid-feedback">
-                    Please enter the governorate you live in.
-                </div>
-            </div>
-            <div class="mb-3">
-                <label for="inputAddressLine1" class="form-label">Address line 1<span class="text-danger">
-                        *</span></label>
-                <input type="text" class="form-control form-control-lg" id="inputAddressLine1" placeholder="" required>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
-                <div class="invalid-feedback">
-                    Please enter an address line.
-                </div>
-            </div>
-            <div class="mb-5">
-                <label for="inputAddressLine2" class="form-label">Address line 2</label>
-                <input type="text" class="form-control form-control-lg" id="inputAddressLine2" placeholder="">
-            </div>
-            <div class="d-flex">
-                <button type="button" class="btn btn-info text-white">Previous</button>
-                <button type="submit" class="btn btn-info text-white ms-auto">Next</button>
+        <form [formGroup]="addressForm" (ngSubmit)="submitAddress()" class="mt-5">
+            <app-text-input [formControl]="$any(addressForm.controls['govName'])" [label]="'Governorate'"
+                [list]="governoratesString"></app-text-input>
+            <app-text-input [formControl]="$any(addressForm.controls['area'])" [label]="'Area'"
+                [list]="areas"></app-text-input>
+            <app-text-input [formControl]="$any(addressForm.controls['addressLine1'])"
+                [label]="'Address Line 1'"></app-text-input>
+            <app-text-input [formControl]="$any(addressForm.controls['addressLine2'])"
+                [label]="'Address Line 2'"></app-text-input>
+            <div class="text-end mt-5">
+                <button type="button" class="btn btn-info text-white me-3" routerLink="/details">Previous</button>
+                <button [disabled]="!addressForm.valid" type="submit" class="btn btn-info text-white">Next</button>
             </div>
         </form>
     </div>

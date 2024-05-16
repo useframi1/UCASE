@@ -13,5 +13,6 @@ public class AutoMapperProfiles : Profile
         CreateMap<PreferredIndustry, PreferredIndustryDto>();
         CreateMap<PreferredSubject, PreferredSubjectDto>();
         CreateMap<RegisterDto, User>();
+        CreateMap<Governorate, GovernorateDto>();
     }
 }

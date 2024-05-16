@@ -1,8 +1,12 @@
 <div class="mb-3">
-    <label for="input{{label}}" class="form-label">{{label}}<span class="text-danger" *ngIf="label != 'Last Name'">
+    <label for="input{{label}}" class="form-label">{{label}}<span class="text-danger"
+            *ngIf="label != 'Last Name' && label != 'Address Line 2'">
             *</span></label>
     <input [class.is-invalid]="control.touched && control.invalid" type={{type}} class="form-control form-control-lg"
-        [formControl]="control" id="input{{label}}" placeholder="" autocomplete="off">
+        [formControl]="control" id="input{{label}}" [attr.list]="list" placeholder="" autocomplete="off">
+    <datalist id="{{list}}">
+        <option *ngFor="let item of list" [value]="item">{{item}}</option>
+    </datalist>
     <div class="invalid-feedback" *ngIf="control.errors?.['required']">
         {{label}} field is required
     </div>
@@ -20,5 +24,8 @@
     </div>
     <div class="invalid-feedback" *ngIf="control.errors?.['invalidPhoneNumber']">
         Please enter a valid {{label}}
+    </div>
+    <div class="invalid-feedback" *ngIf="control.errors?.['notExists']">
+        Invalid {{label}}
     </div>
 </div>

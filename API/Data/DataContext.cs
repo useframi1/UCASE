@@ -48,7 +48,7 @@ public partial class DataContext : DbContext
 
         modelBuilder.Entity<Governorate>(entity =>
         {
-            entity.HasKey(e => new { e.GovName, e.Area }).HasName("governorate_pkey");
+            entity.HasKey(e => new { e.GovName, e.Area }).HasName("governorates_pkey");
 
             entity.ToTable("governorates");
 
@@ -74,7 +74,7 @@ public partial class DataContext : DbContext
 
         modelBuilder.Entity<PreferredIndustry>(entity =>
         {
-            entity.HasKey(e => new { e.Email, e.Industry }).HasName("user_industry_pkey");
+            entity.HasKey(e => new { e.Email, e.Industry }).HasName("preferredindustries_pkey");
 
             entity.ToTable("preferred_industries");
 
@@ -87,12 +87,12 @@ public partial class DataContext : DbContext
 
             entity.HasOne(d => d.EmailNavigation).WithMany(p => p.PreferredIndustries)
                 .HasForeignKey(d => d.Email)
-                .HasConstraintName("user_industry_email_fkey");
+                .HasConstraintName("preferredindustries_email_fkey");
         });
 
         modelBuilder.Entity<PreferredSubject>(entity =>
         {
-            entity.HasKey(e => new { e.Email, e.Subject }).HasName("user_subjects_pkey");
+            entity.HasKey(e => new { e.Email, e.Subject }).HasName("preferredsubjects_pkey");
 
             entity.ToTable("preferred_subjects");
 
@@ -105,12 +105,12 @@ public partial class DataContext : DbContext
 
             entity.HasOne(d => d.EmailNavigation).WithMany(p => p.PreferredSubjects)
                 .HasForeignKey(d => d.Email)
-                .HasConstraintName("user_subjects_email_fkey");
+                .HasConstraintName("preferredsubjects_email_fkey");
         });
 
         modelBuilder.Entity<University>(entity =>
         {
-            entity.HasKey(e => e.UniName).HasName("university_pkey");
+            entity.HasKey(e => e.UniName).HasName("universities_pkey");
 
             entity.ToTable("universities");
 
@@ -135,27 +135,27 @@ public partial class DataContext : DbContext
             entity.HasOne(d => d.Governorate).WithMany(p => p.Universities)
                 .HasForeignKey(d => new { d.GovName, d.Area })
                 .OnDelete(DeleteBehavior.SetNull)
-                .HasConstraintName("university_gov_name_area_fkey");
+                .HasConstraintName("universities_gov_name_area_fkey");
 
-            entity.HasMany(d => d.Majors).WithMany(p => p.UniNames)
+            entity.HasMany(d => d.MajorNames).WithMany(p => p.UniNames)
                 .UsingEntity<Dictionary<string, object>>(
-                    "Universitymajor",
+                    "UniversityMajor",
                     r => r.HasOne<Major>().WithMany()
-                        .HasForeignKey("Major")
-                        .HasConstraintName("universitymajors_major_fkey"),
+                        .HasForeignKey("MajorName")
+                        .HasConstraintName("universitymajors_major_name_fkey"),
                     l => l.HasOne<University>().WithMany()
                         .HasForeignKey("UniName")
                         .HasConstraintName("universitymajors_uni_name_fkey"),
                     j =>
                     {
-                        j.HasKey("UniName", "Major").HasName("universitymajors_pkey");
-                        j.ToTable("universitymajors");
+                        j.HasKey("UniName", "MajorName").HasName("universitymajors_pkey");
+                        j.ToTable("university_majors");
                         j.IndexerProperty<string>("UniName")
                             .HasMaxLength(200)
                             .HasColumnName("uni_name");
-                        j.IndexerProperty<string>("Major")
+                        j.IndexerProperty<string>("MajorName")
                             .HasMaxLength(200)
-                            .HasColumnName("major");
+                            .HasColumnName("major_name");
                     });
         });
 
@@ -168,12 +168,12 @@ public partial class DataContext : DbContext
             entity.Property(e => e.Email)
                 .HasMaxLength(100)
                 .HasColumnName("email");
-            entity.Property(e => e.Addressline1)
+            entity.Property(e => e.AddressLine1)
                 .HasMaxLength(200)
-                .HasColumnName("addressline1");
-            entity.Property(e => e.Addressline2)
+                .HasColumnName("address_line1");
+            entity.Property(e => e.AddressLine2)
                 .HasMaxLength(200)
-                .HasColumnName("addressline2");
+                .HasColumnName("address_line2");
             entity.Property(e => e.Area)
                 .HasMaxLength(200)
                 .HasColumnName("area");
@@ -193,13 +193,13 @@ public partial class DataContext : DbContext
             entity.Property(e => e.Nationality)
                 .HasMaxLength(100)
                 .HasColumnName("nationality");
-            entity.Property(e => e.Passwordhash).HasColumnName("passwordhash");
-            entity.Property(e => e.Passwordsalt).HasColumnName("passwordsalt");
-            entity.Property(e => e.Phoneno)
+            entity.Property(e => e.PasswordHash).HasColumnName("password_hash");
+            entity.Property(e => e.PasswordSalt).HasColumnName("password_salt");
+            entity.Property(e => e.PhoneNo)
                 .HasMaxLength(11)
                 .IsFixedLength()
-                .HasColumnName("phoneno");
-            entity.Property(e => e.StartUni).HasColumnName("startUni");
+                .HasColumnName("phone_no");
+            entity.Property(e => e.StartUni).HasColumnName("start_uni");
         });
 
         OnModelCreatingPartial(modelBuilder);

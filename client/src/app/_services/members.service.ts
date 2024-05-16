@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Member } from '../_models/member';
 import { Details } from '../_models/details';
+import { Address } from '../_models/address';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +30,16 @@ export class MembersService {
   updateMemberDetails(details: Details) {
     return this.http.put<boolean>(
       this.baseUrl + 'users/updateDetails',
-      details
+      details,
+      this.getHttpOptions()
+    );
+  }
+
+  updateMemberAddress(address: Address) {
+    return this.http.put<boolean>(
+      this.baseUrl + 'users/updateAddress',
+      address,
+      this.getHttpOptions()
     );
   }
 

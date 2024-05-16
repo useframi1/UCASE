@@ -3,7 +3,7 @@
         <h1 class="fw-bold text-uppercase text-info">More information about you</h1>
         <p class="h5 mt-3"><small class="text-body-secondary">You personal details can help us to provide better
                 support.</small></p>
-        <form [formGroup]="detailsForm" (ngSubmit)="submitDetails()" class="mt-5 needs-validation">
+        <form [formGroup]="detailsForm" (ngSubmit)="submitDetails()" class="mt-5">
             <app-date-picker [formControl]="$any(detailsForm.controls['dob'])" [label]="'Date of Birth'"
                 [maxDate]="maxDate"></app-date-picker>
             <div class="mb-3">

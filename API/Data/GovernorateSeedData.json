@@ -1,0 +1,38 @@
+[
+    {
+        "GovName": "Cairo",
+        "Area": "Nasr City"
+    },
+    {
+        "GovName": "Cairo",
+        "Area": "Maadi"
+    },
+    {
+        "GovName": "Cairo",
+        "Area": "Heliopolis"
+    },
+    {
+        "GovName": "Alexandria",
+        "Area": "El Montaza"
+    },
+    {
+        "GovName": "Alexandria",
+        "Area": "Sidi Gaber"
+    },
+    {
+        "GovName": "Alexandria",
+        "Area": "El Raml"
+    },
+    {
+        "GovName": "Giza",
+        "Area": "Dokki"
+    },
+    {
+        "GovName": "Giza",
+        "Area": "Mohandessin"
+    },
+    {
+        "GovName": "Giza",
+        "Area": "Agouza"
+    }
+]

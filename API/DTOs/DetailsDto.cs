@@ -8,7 +8,7 @@ public class DetailsDto
 
     public char? Gender { get; set; }
 
-    public string Phoneno { get; set; }
+    public string PhoneNo { get; set; }
 
     public string Nationality { get; set; }
 

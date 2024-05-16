@@ -49,7 +49,7 @@ export class DetailsComponent implements OnInit {
   }
 
   submitDetails() {
-    const userString = localStorage.getItem('userTemp');
+    const userString = localStorage.getItem('user');
     if (!userString) return;
     const user: User = JSON.parse(userString);
     const dob = this.getDateOnly(this.detailsForm.controls['dob'].value);

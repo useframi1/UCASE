@@ -7,9 +7,9 @@ public partial class User
 {
     public string Email { get; set; }
 
-    public byte[] Passwordhash { get; set; }
+    public byte[] PasswordHash { get; set; }
 
-    public byte[] Passwordsalt { get; set; }
+    public byte[] PasswordSalt { get; set; }
 
     public string FirstName { get; set; }
 
@@ -17,11 +17,11 @@ public partial class User
 
     public DateOnly? Dob { get; set; }
 
-    public string Phoneno { get; set; }
+    public string PhoneNo { get; set; }
 
-    public string Addressline1 { get; set; }
+    public string AddressLine1 { get; set; }
 
-    public string Addressline2 { get; set; }
+    public string AddressLine2 { get; set; }
 
     public string Nationality { get; set; }
 
