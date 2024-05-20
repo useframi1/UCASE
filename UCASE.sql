@@ -15,29 +15,7 @@ CREATE TABLE IF NOT EXISTS Universities
     Gov_Name VARCHAR(200),
     Area VARCHAR(200),
     General_Requirements TEXT,
-    Logo BYTEA,
-    FOREIGN KEY (Gov_Name, Area) REFERENCES governorates(gov_name, area)
-    ON UPDATE CASCADE
-    ON DELETE SET NULL
-);
-
-CREATE TABLE IF NOT EXISTS Majors
-(
-	Major_Name VARCHAR(200) PRIMARY KEY,
-    Major_Requirements TEXT
-);
-
-CREATE TABLE IF NOT EXISTS University_Majors
-(
-	Uni_Name VARCHAR(200),
-    Major_Name VARCHAR(200),
-    PRIMARY KEY (Uni_Name, Major_Name), 
-    FOREIGN KEY (Uni_Name) REFERENCES Universities(Uni_Name)
-    ON UPDATE CASCADE
-    ON DELETE CASCADE,
-    FOREIGN KEY (Major_Name) REFERENCES Majors(Major_Name)
-    ON UPDATE CASCADE
-    ON DELETE CASCADE
+    Logo BYTEA
 );
 
 CREATE TABLE IF NOT EXISTS Users
@@ -85,70 +63,59 @@ CREATE TABLE IF NOT EXISTS Favorite_Universities
     PRIMARY KEY (Email, University), 
     FOREIGN KEY (Email) REFERENCES Users (Email)
     ON UPDATE CASCADE
-    ON DELETE CASCADE
-);
-
--- NOT DONE
-CREATE TABLE IF NOT EXISTS Application
-(
-	Email VARCHAR(100),
-    Application_Date DATETIME,
-    Semester ENUM("Fall", "Spring"),
-    App_Year INT,
-    Education_System VARCHAR(100),
-    GPA DECIMAL(3,2),
-    School VARCHAR(100),
-    PRIMARY KEY (Email, Application_Date), 
-    FOREIGN KEY (Email) REFERENCES Applicant (Email)
+    ON DELETE CASCADE,
+    FOREIGN KEY (University) REFERENCES Universities (Uni_Name)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS Application_References
+CREATE TABLE IF NOT EXISTS Subjects
+(
+    Subject_Name VARCHAR(200) PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS Industries
+(
+    Industry_Name VARCHAR(200) PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS Applications
 (
 	Email VARCHAR(100),
-    Application_Date DATETIME,
-    Reference_Email VARCHAR(100),
-	PRIMARY KEY (Email, Application_Date,Reference_Email),
-    FOREIGN KEY (Email, Application_Date) REFERENCES Application (Email, Application_Date)
+    National_ID BYTEA,
+    Passport BYTEA,
+    Personal_Statement BYTEA,
+    Guardian_Name varchar(100),
+    Guardian_Profession varchar(100),
+    Guardian_Company varchar(100),
+	Guardian_Number char(11),
+    Guardian_Email varchar(100),
+	School_Country varchar(100),
+	School_City varchar(100),
+	School_Name varchar(100),
+	Year_Of_Graduation INT,
+    Birth_Certificate BYTEA,
+	Transcript BYTEA,
+	Recommendation_Letter BYTEA, 
+	Personal_Photo BYTEA,
+	Military_Form_2 BYTEA,
+    Military_Form_6 BYTEA,
+    Residency_Copy BYTEA,
+    PRIMARY KEY (Email),
+    FOREIGN KEY (Email) REFERENCES Users(Email)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS Application_ExtraCurricular
-(
-	Email VARCHAR(100),
-    Application_Date DATETIME,
-    Extra_Curricular VARCHAR(100),
-	PRIMARY KEY (Email, Application_Date,Extra_Curricular),
-    FOREIGN KEY (Email, Application_Date) REFERENCES Application (Email, Application_Date)
-    ON UPDATE CASCADE
-    ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS Application_Major
-(
-	Email VARCHAR(100),
-    Application_Date DATETIME,
-    Major_Name VARCHAR(100),
-	PRIMARY KEY (Email, Application_Date,Major_Name),
-    FOREIGN KEY (Email, Application_Date) REFERENCES Application (Email, Application_Date)
-    ON UPDATE CASCADE
-    ON DELETE CASCADE
-);
-
--- ????
-CREATE TABLE IF NOT EXISTS University_Application
+CREATE TABLE IF NOT EXISTS University_Choices
 (
 	Uni_Name VARCHAR(200),
 	Email VARCHAR(100),
-    Application_Date DATETIME,
-    Major VARCHAR(100),
-	PRIMARY KEY (Uni_Name, Email, Application_Date,Major),
-    FOREIGN KEY (Uni_Name) REFERENCES University (Uni_Name)
+	PRIMARY KEY (Uni_Name, Email),
+    FOREIGN KEY (Uni_Name) REFERENCES Universities(Uni_Name)
     ON UPDATE CASCADE
     ON DELETE CASCADE,
-    FOREIGN KEY (Email, Application_Date) REFERENCES Application (Email, Application_Date)
+    FOREIGN KEY (Email) REFERENCES Applications(Email)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );
@@ -156,14 +123,10 @@ CREATE TABLE IF NOT EXISTS University_Application
 CREATE TABLE IF NOT EXISTS Certificates
 (
 	Email VARCHAR(100),
-    Application_Date DATETIME,
     Certificate_Name VARCHAR(100),
-    Test_Date DATE,
-    Score VARCHAR(100),
     Certificate_Photo BYTEA,
-	PRIMARY KEY (Email, Application_Date,Test_Name,Test_Date),
-    FOREIGN KEY (Email, Application_Date) REFERENCES Application (Email, Application_Date)
+	PRIMARY KEY (Email, Certificate_Name),
+    FOREIGN KEY (Email) REFERENCES Applications(Email)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );
-

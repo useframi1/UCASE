@@ -3,29 +3,23 @@
             *ngIf="label != 'Last Name' && label != 'Address Line 2'">
             *</span></label>
     <input [class.is-invalid]="control.touched && control.invalid" type={{type}} class="form-control form-control-lg"
-        [formControl]="control" id="input{{label}}" [attr.list]="list" placeholder="" autocomplete="off">
-    <datalist id="{{list}}">
-        <option *ngFor="let item of list" [value]="item">{{item}}</option>
-    </datalist>
+        [formControl]="control" id="input{{label}}" placeholder={{placeholder}} autocomplete="off">
     <div class="invalid-feedback" *ngIf="control.errors?.['required']">
-        {{label}} field is required
+        {{fieldName}} field is required
     </div>
     <div class="invalid-feedback" *ngIf="control.errors?.['email']">
-        Please enter a valid {{label}}
+        Please enter a valid {{fieldName}}
     </div>
     <div class="invalid-feedback" *ngIf="control.errors?.['minlength']">
-        {{label}} must be at least {{control.errors?.['minlength'].requiredLength}} characters
+        {{fieldName}} must be at least {{control.errors?.['minlength'].requiredLength}} characters
     </div>
     <div class="invalid-feedback" *ngIf="control.errors?.['maxlength']">
-        {{label}} must be at most {{control.errors?.['maxlength'].requiredLength}} characters
+        {{fieldName}} must be at most {{control.errors?.['maxlength'].requiredLength}} characters
     </div>
     <div class="invalid-feedback" *ngIf="control.errors?.['notMatching']">
         Passwords do not match
     </div>
     <div class="invalid-feedback" *ngIf="control.errors?.['invalidPhoneNumber']">
-        Please enter a valid {{label}}
-    </div>
-    <div class="invalid-feedback" *ngIf="control.errors?.['notExists']">
-        Invalid {{label}}
+        Please enter a valid {{fieldName}}
     </div>
 </div>

@@ -1,0 +1,102 @@
+[
+    {
+        "UniName": "Cairo University",
+        "Description": "Cairo University is Egypt's premier public university. Its main campus is in Giza, immediately across the Nile from Cairo.",
+        "Ranking": 1,
+        "AcceptanceRate": 0.35,
+        "Link": "http://www.cu.edu.eg/",
+        "GovName": "Giza",
+        "Area": "Giza",
+        "GeneralRequirements": "High school diploma, Entrance Exam"
+    },
+    {
+        "UniName": "Ain Shams University",
+        "Description": "Ain Shams University, as the third Egyptian university, was founded in July 1950 under the name of 'Ibrahim Pasha University'.",
+        "Ranking": 2,
+        "AcceptanceRate": 0.45,
+        "Link": "http://www.asu.edu.eg/",
+        "GovName": "Cairo",
+        "Area": "Abbassia",
+        "GeneralRequirements": "High school diploma, Entrance Exam"
+    },
+    {
+        "UniName": "Alexandria University",
+        "Description": "Alexandria University is a public research university in Alexandria, Egypt. It was established in 1938 as a satellite of Fouad University.",
+        "Ranking": 3,
+        "AcceptanceRate": 0.4,
+        "Link": "http://www.alexu.edu.eg/",
+        "GovName": "Alexandria",
+        "Area": "Alexandria",
+        "GeneralRequirements": "High school diploma, Entrance Exam"
+    },
+    {
+        "UniName": "Assiut University",
+        "Description": "Assiut University is a university located in Assiut, Egypt. It was established in October 1957 as the first university in Upper Egypt.",
+        "Ranking": 4,
+        "AcceptanceRate": 0.5,
+        "Link": "http://www.aun.edu.eg/",
+        "GovName": "Assiut",
+        "Area": "Assiut",
+        "GeneralRequirements": "High school diploma, Entrance Exam"
+    },
+    {
+        "UniName": "Mansoura University",
+        "Description": "Mansoura University was founded in 1972 in Mansoura city, Egypt. It is in the middle of the Nile Delta.",
+        "Ranking": 5,
+        "AcceptanceRate": 0.6,
+        "Link": "http://www.mans.edu.eg/",
+        "GovName": "Dakahlia",
+        "Area": "Mansoura",
+        "GeneralRequirements": "High school diploma, Entrance Exam"
+    },
+    {
+        "UniName": "Zagazig University",
+        "Description": "Zagazig University is an Egyptian university in the Nile Delta city of Zagazig, the capital of Ash Sharqiyah governorate.",
+        "Ranking": 6,
+        "AcceptanceRate": 0.55,
+        "Link": "http://www.zu.edu.eg/",
+        "GovName": "Sharqia",
+        "Area": "Zagazig",
+        "GeneralRequirements": "High school diploma, Entrance Exam"
+    },
+    {
+        "UniName": "Helwan University",
+        "Description": "Helwan University is a public university based in Helwan, Egypt, which is part of Greater Cairo. It comprises 21 faculties as well as 50 research centers and productive units.",
+        "Ranking": 7,
+        "AcceptanceRate": 0.5,
+        "Link": "http://www.helwan.edu.eg/",
+        "GovName": "Cairo",
+        "Area": "Helwan",
+        "GeneralRequirements": "High school diploma, Entrance Exam"
+    },
+    {
+        "UniName": "Tanta University",
+        "Description": "Tanta University is an Egyptian university in the city of Tanta, Al Gharbiyah governorate, Egypt.",
+        "Ranking": 8,
+        "AcceptanceRate": 0.6,
+        "Link": "http://www.tanta.edu.eg/",
+        "GovName": "Gharbia",
+        "Area": "Tanta",
+        "GeneralRequirements": "High school diploma, Entrance Exam"
+    },
+    {
+        "UniName": "Minia University",
+        "Description": "Minia University is an educational institution in Minya, Egypt.",
+        "Ranking": 9,
+        "AcceptanceRate": 0.6,
+        "Link": "http://www.minia.edu.eg/",
+        "GovName": "Minya",
+        "Area": "Minya",
+        "GeneralRequirements": "High school diploma, Entrance Exam"
+    },
+    {
+        "UniName": "Suez Canal University",
+        "Description": "Suez Canal University is a public university in Ismailia, Egypt. It was established in 1976 and has schools of medicine, agriculture and technology.",
+        "Ranking": 10,
+        "AcceptanceRate": 0.6,
+        "Link": "http://www.suez.edu.eg/",
+        "GovName": "Ismailia",
+        "Area": "Ismailia",
+        "GeneralRequirements": "High school diploma, Entrance Exam"
+    }
+]

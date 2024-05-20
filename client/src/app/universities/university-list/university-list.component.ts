@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { University } from 'src/app/_models/university';
+import { DataService } from 'src/app/_services/data.service';
 
 @Component({
   selector: 'app-university-list',
@@ -6,33 +9,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./university-list.component.css'],
 })
 export class UniversityListComponent implements OnInit {
-  unis: any;
+  unis: University[] = [];
 
-  constructor() {}
+  constructor(private dataService: DataService, private router: Router) {}
 
   ngOnInit(): void {
-    this.unis = [
-      {
-        name: 'AUC (The American university in Cairo)',
-        imgsrc: 'https://picsum.photos/200/200',
-        city: 'Cairo',
-        location: 'New Cairo',
-        website: 'https://www.aucegypt.edu',
+    this.dataService.getUniversities().subscribe({
+      next: (response) => {
+        this.unis = response;
       },
-      {
-        name: 'GUC (The German university in Cairo)',
-        imgsrc: 'https://picsum.photos/200/200',
-        city: 'Cairo',
-        location: 'New Cairo',
-        website: 'https://www.guc.edu.eg/',
-      },
-      {
-        name: 'Cairo university',
-        imgsrc: 'https://picsum.photos/200/200',
-        city: 'Giza',
-        location: 'Al Giza',
-        website: 'https://cu.edu.eg/Home',
-      },
-    ];
+    });
+  }
+
+  goToUniPage(index: number) {
+    localStorage.setItem('uniData', JSON.stringify(this.unis[index]));
+    this.router.navigateByUrl('/university-details');
   }
 }

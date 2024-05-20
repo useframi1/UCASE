@@ -1,1 +1,150 @@
-<p>profile works!</p>
+<div class="container mt-5 py-5">
+    <div class="row gy-3">
+        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-body text-center">
+                    <div class="user-avatar">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin">
+                    </div>
+                    <p class="text-light h5 mb-0">{{member?.firstName}} {{member?.lastName}}</p>
+                    <p class="text-secondary">{{member?.email}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]="profileForm" (ngSubmit)="submitForm()" *ngIf="formIsInitialized">
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h5 class="mb-2 text-info">Personal Details</h5>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <app-text-input [formControl]="$any(profileForm.controls['firstName'])"
+                                    [label]="'First Name'" [fieldName]="'First Name'"></app-text-input>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <app-text-input [formControl]="$any(profileForm.controls['lastName'])"
+                                    [label]="'Last Name'" [fieldName]="'Last Name'"></app-text-input>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <app-date-picker [formControl]="$any(profileForm.controls['dob'])"
+                                    [label]="'Date of Birth'" [maxDate]="maxDate"></app-date-picker>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mb-3">
+                                <label for="inputGender" class="form-label">Gender</label>
+                                <div class="d-flex" id="inputGender">
+                                    <input type="radio" class="btn-check" value="Male" id="optionMale"
+                                        formControlName="gender">
+                                    <label class="btn rounded-pill" for="optionMale">Male</label>
+
+                                    <input type="radio" class="btn-check" value="Female" id="optionFemale"
+                                        formControlName="gender">
+                                    <label class="btn rounded-pill" for="optionFemale">Female</label>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <app-text-input [formControl]="$any(profileForm.controls['phoneNo'])"
+                                    [label]="'Phone Number'" [fieldName]="'Phone Number'"
+                                    [type]="'tel'"></app-text-input>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mb-3">
+                                <label for="inputNationality" class="form-label">Nationality</label>
+                                <div class="d-flex" id="inputNationality">
+                                    <input type="radio" class="btn-check" value="Egyptian" id="optionEgyptian"
+                                        formControlName="nationality">
+                                    <label class="btn rounded-pill" for="optionEgyptian">Egyptian</label>
+
+                                    <input type="radio" class="btn-check" value="Foreign" id="optionForeign"
+                                        formControlName="nationality">
+                                    <label class="btn rounded-pill" for="optionForeign">Foreign</label>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <label for="inputStartUni" class="form-label">When are you planning to start
+                                    uni?</label>
+
+                                <div class="d-flex" id="inputStartUni">
+                                    <input type="radio" class="btn-check" value="2024" id="option1"
+                                        formControlName="startUni">
+                                    <label class="btn rounded-pill" for="option1">2024</label>
+
+                                    <input type="radio" class="btn-check" value="2025" id="option2"
+                                        formControlName="startUni">
+                                    <label class="btn rounded-pill" for="option2">2025</label>
+
+                                    <input type="radio" class="btn-check" value="2026" id="option3"
+                                        formControlName="startUni">
+                                    <label class="btn rounded-pill" for="option3">2026</label>
+
+                                    <input type="radio" class="btn-check" value="2027" id="option4"
+                                        formControlName="startUni">
+                                    <label class="btn rounded-pill" for="option4">2027</label>
+
+                                    <input type="radio" class="btn-check" value="2028" id="option5"
+                                        formControlName="startUni">
+                                    <label class="btn rounded-pill" for="option5">2028</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h5 class="mb-2 text-info">Address</h5>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <app-text-input [formControl]="$any(profileForm.controls['govName'])"
+                                    [label]="'Governorate'" [fieldName]="'Governorate'" [typeahead]="governoratesString"
+                                    [typeaheadScrollable]="true"
+                                    [typeaheadOptionsInScrollableView]="5"></app-text-input>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <app-text-input [formControl]="$any(profileForm.controls['area'])" [label]="'Area'"
+                                    [fieldName]="'Area'" [typeahead]="areas" [typeaheadScrollable]="true"
+                                    [typeaheadOptionsInScrollableView]="5"></app-text-input>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <app-text-input [formControl]="$any(profileForm.controls['addressLine1'])"
+                                    [label]="'Address Line 1'" [fieldName]="'Address Line 1'"></app-text-input>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <app-text-input [formControl]="$any(profileForm.controls['addressLine2'])"
+                                    [label]="'Address Line 2'" [fieldName]="'Address Line 1'"></app-text-input>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h5 class="mb-2 text-info">Interests</h5>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <app-text-input [formControl]="$any(profileForm.controls['subject'])"
+                                    [label]="'Which subjects are you interested in?'" [fieldName]="'Subjects'"
+                                    [typeahead]="subjects" [typeaheadScrollable]="true"
+                                    [typeaheadOptionsInScrollableView]="5" [typeaheadMultipleSearch]="true"
+                                    typeaheadMultipleSearchDelimiters=","
+                                    [placeholder]="'Ex: Mathematics,Physics...'"></app-text-input>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <app-text-input [formControl]="$any(profileForm.controls['industry'])" [label]="'Which industries are you interested
+                                in?'" [fieldName]="'Industries'" [typeahead]="industries" [typeaheadScrollable]="true"
+                                    [typeaheadOptionsInScrollableView]="5" [typeaheadMultipleSearch]="true"
+                                    typeaheadMultipleSearchDelimiters=","
+                                    [placeholder]="'Ex: Finance,Education...'"></app-text-input>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="text-start">
+                                    <button type="button" class="btn btn-secondary me-3"
+                                        (click)="goBack()">Cancel</button>
+                                    <button [disabled]="!profileForm.valid || !formChanged" type="submit"
+                                        class="btn btn-danger">Save
+                                        Changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -23,4 +23,25 @@ public class DataRepository : IDataRepository
         .ProjectTo<GovernorateDto>(_mapper.ConfigurationProvider)
         .ToListAsync();
     }
+
+    public async Task<IEnumerable<string>> GetIndustriesAsync()
+    {
+        return await _context.Industries
+        .Select(i => i.IndustryName)
+        .ToListAsync();
+    }
+
+    public async Task<IEnumerable<string>> GetSubjectsAsync()
+    {
+        return await _context.Subjects
+        .Select(s => s.SubjectName)
+        .ToListAsync();
+    }
+
+    public async Task<IEnumerable<string>> GetUniversityNamesAsync()
+    {
+        return await _context.Universities
+        .Select(u => u.UniName)
+        .ToListAsync();
+    }
 }

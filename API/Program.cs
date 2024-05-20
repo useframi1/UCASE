@@ -30,6 +30,9 @@ try
     var context = services.GetRequiredService<DataContext>();
     await context.Database.MigrateAsync();
     await Seed.SeedGovernorates(context);
+    await Seed.SeedSubjects(context);
+    await Seed.SeedIndustries(context);
+    await Seed.SeedUniversities(context);
 }
 catch (Exception ex)
 {

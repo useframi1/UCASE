@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -20,17 +21,19 @@ import { MembersService } from 'src/app/_services/members.service';
 export class AddressComponent implements OnInit {
   addressForm: FormGroup = new FormGroup({});
   governorates: Governorate[] = [];
-  governoratesString: any = [];
+  governoratesString: string[] = [];
   areas: string[] = [];
 
   constructor(
     private memberService: MembersService,
     private dataService: DataService,
     public router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
+    this.governoratesString = [];
     this.dataService.getGovernorates().subscribe({
       next: (response) => {
         this.governorates = response;
@@ -42,6 +45,10 @@ export class AddressComponent implements OnInit {
     });
 
     this.initializeForm();
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   initializeForm() {

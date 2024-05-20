@@ -12,15 +12,19 @@ public partial class DataContext : DbContext
     {
     }
 
-    public virtual DbSet<FavoriteUniversity> FavoriteUniversities { get; set; }
+    public virtual DbSet<Application> Applications { get; set; }
+
+    public virtual DbSet<Certificate> Certificates { get; set; }
 
     public virtual DbSet<Governorate> Governorates { get; set; }
 
-    public virtual DbSet<Major> Majors { get; set; }
+    public virtual DbSet<Industry> Industries { get; set; }
 
     public virtual DbSet<PreferredIndustry> PreferredIndustries { get; set; }
 
     public virtual DbSet<PreferredSubject> PreferredSubjects { get; set; }
+
+    public virtual DbSet<Subject> Subjects { get; set; }
 
     public virtual DbSet<University> Universities { get; set; }
 
@@ -28,22 +32,74 @@ public partial class DataContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<FavoriteUniversity>(entity =>
+        modelBuilder.Entity<Application>(entity =>
         {
-            entity.HasKey(e => new { e.Email, e.University }).HasName("favorite_universities_pkey");
+            entity.HasKey(e => e.Email).HasName("applications_pkey");
 
-            entity.ToTable("favorite_universities");
+            entity.ToTable("applications");
 
             entity.Property(e => e.Email)
                 .HasMaxLength(100)
                 .HasColumnName("email");
-            entity.Property(e => e.University)
-                .HasMaxLength(200)
-                .HasColumnName("university");
+            entity.Property(e => e.BirthCertificate).HasColumnName("birth_certificate");
+            entity.Property(e => e.GuardianCompany)
+                .HasMaxLength(100)
+                .HasColumnName("guardian_company");
+            entity.Property(e => e.GuardianEmail)
+                .HasMaxLength(100)
+                .HasColumnName("guardian_email");
+            entity.Property(e => e.GuardianName)
+                .HasMaxLength(100)
+                .HasColumnName("guardian_name");
+            entity.Property(e => e.GuardianNumber)
+                .HasMaxLength(11)
+                .IsFixedLength()
+                .HasColumnName("guardian_number");
+            entity.Property(e => e.GuardianProfession)
+                .HasMaxLength(100)
+                .HasColumnName("guardian_profession");
+            entity.Property(e => e.MilitaryForm2).HasColumnName("military_form_2");
+            entity.Property(e => e.MilitaryForm6).HasColumnName("military_form_6");
+            entity.Property(e => e.NationalId).HasColumnName("national_id");
+            entity.Property(e => e.Passport).HasColumnName("passport");
+            entity.Property(e => e.PersonalPhoto).HasColumnName("personal_photo");
+            entity.Property(e => e.PersonalStatement).HasColumnName("personal_statement");
+            entity.Property(e => e.RecommendationLetter).HasColumnName("recommendation_letter");
+            entity.Property(e => e.ResidencyCopy).HasColumnName("residency_copy");
+            entity.Property(e => e.SchoolCity)
+                .HasMaxLength(100)
+                .HasColumnName("school_city");
+            entity.Property(e => e.SchoolCountry)
+                .HasMaxLength(100)
+                .HasColumnName("school_country");
+            entity.Property(e => e.SchoolName)
+                .HasMaxLength(100)
+                .HasColumnName("school_name");
+            entity.Property(e => e.Transcript).HasColumnName("transcript");
+            entity.Property(e => e.YearOfGraduation).HasColumnName("year_of_graduation");
 
-            entity.HasOne(d => d.EmailNavigation).WithMany(p => p.FavoriteUniversities)
+            entity.HasOne(d => d.EmailNavigation).WithOne(p => p.Application)
+                .HasForeignKey<Application>(d => d.Email)
+                .HasConstraintName("applications_email_fkey");
+        });
+
+        modelBuilder.Entity<Certificate>(entity =>
+        {
+            entity.HasKey(e => new { e.Email, e.CertificateName }).HasName("certificates_pkey");
+
+            entity.ToTable("certificates");
+
+            entity.Property(e => e.Email)
+                .HasMaxLength(100)
+                .HasColumnName("email");
+            entity.Property(e => e.CertificateName)
+                .HasMaxLength(100)
+                .HasColumnName("certificate_name");
+            entity.Property(e => e.CertificatePhoto).HasColumnName("certificate_photo");
+
+            entity.HasOne(d => d.EmailNavigation).WithMany(p => p.Certificates)
                 .HasForeignKey(d => d.Email)
-                .HasConstraintName("favorite_universities_email_fkey");
+                .HasConstraintName("certificates_email_fkey");
         });
 
         modelBuilder.Entity<Governorate>(entity =>
@@ -60,16 +116,15 @@ public partial class DataContext : DbContext
                 .HasColumnName("area");
         });
 
-        modelBuilder.Entity<Major>(entity =>
+        modelBuilder.Entity<Industry>(entity =>
         {
-            entity.HasKey(e => e.MajorName).HasName("majors_pkey");
+            entity.HasKey(e => e.IndustryName).HasName("industries_pkey");
 
-            entity.ToTable("majors");
+            entity.ToTable("industries");
 
-            entity.Property(e => e.MajorName)
+            entity.Property(e => e.IndustryName)
                 .HasMaxLength(200)
-                .HasColumnName("major_name");
-            entity.Property(e => e.MajorRequirements).HasColumnName("major_requirements");
+                .HasColumnName("industry_name");
         });
 
         modelBuilder.Entity<PreferredIndustry>(entity =>
@@ -108,6 +163,17 @@ public partial class DataContext : DbContext
                 .HasConstraintName("preferredsubjects_email_fkey");
         });
 
+        modelBuilder.Entity<Subject>(entity =>
+        {
+            entity.HasKey(e => e.SubjectName).HasName("subjects_pkey");
+
+            entity.ToTable("subjects");
+
+            entity.Property(e => e.SubjectName)
+                .HasMaxLength(200)
+                .HasColumnName("subject_name");
+        });
+
         modelBuilder.Entity<University>(entity =>
         {
             entity.HasKey(e => e.UniName).HasName("universities_pkey");
@@ -132,30 +198,25 @@ public partial class DataContext : DbContext
             entity.Property(e => e.Logo).HasColumnName("logo");
             entity.Property(e => e.Ranking).HasColumnName("ranking");
 
-            entity.HasOne(d => d.Governorate).WithMany(p => p.Universities)
-                .HasForeignKey(d => new { d.GovName, d.Area })
-                .OnDelete(DeleteBehavior.SetNull)
-                .HasConstraintName("universities_gov_name_area_fkey");
-
-            entity.HasMany(d => d.MajorNames).WithMany(p => p.UniNames)
+            entity.HasMany(d => d.EmailsNavigation).WithMany(p => p.UniNames)
                 .UsingEntity<Dictionary<string, object>>(
-                    "UniversityMajor",
-                    r => r.HasOne<Major>().WithMany()
-                        .HasForeignKey("MajorName")
-                        .HasConstraintName("universitymajors_major_name_fkey"),
+                    "UniversityChoice",
+                    r => r.HasOne<Application>().WithMany()
+                        .HasForeignKey("Email")
+                        .HasConstraintName("university_choices_email_fkey"),
                     l => l.HasOne<University>().WithMany()
                         .HasForeignKey("UniName")
-                        .HasConstraintName("universitymajors_uni_name_fkey"),
+                        .HasConstraintName("university_choices_uni_name_fkey"),
                     j =>
                     {
-                        j.HasKey("UniName", "MajorName").HasName("universitymajors_pkey");
-                        j.ToTable("university_majors");
+                        j.HasKey("UniName", "Email").HasName("university_choices_pkey");
+                        j.ToTable("university_choices");
                         j.IndexerProperty<string>("UniName")
                             .HasMaxLength(200)
                             .HasColumnName("uni_name");
-                        j.IndexerProperty<string>("MajorName")
-                            .HasMaxLength(200)
-                            .HasColumnName("major_name");
+                        j.IndexerProperty<string>("Email")
+                            .HasMaxLength(100)
+                            .HasColumnName("email");
                     });
         });
 
@@ -200,6 +261,27 @@ public partial class DataContext : DbContext
                 .IsFixedLength()
                 .HasColumnName("phone_no");
             entity.Property(e => e.StartUni).HasColumnName("start_uni");
+
+            entity.HasMany(d => d.Universities).WithMany(p => p.Emails)
+                .UsingEntity<Dictionary<string, object>>(
+                    "FavoriteUniversity",
+                    r => r.HasOne<University>().WithMany()
+                        .HasForeignKey("University")
+                        .HasConstraintName("fk_favorite_universities_universities"),
+                    l => l.HasOne<User>().WithMany()
+                        .HasForeignKey("Email")
+                        .HasConstraintName("fk_favorite_universities_users"),
+                    j =>
+                    {
+                        j.HasKey("Email", "University").HasName("favorite_universities_pkey");
+                        j.ToTable("favorite_universities");
+                        j.IndexerProperty<string>("Email")
+                            .HasMaxLength(100)
+                            .HasColumnName("email");
+                        j.IndexerProperty<string>("University")
+                            .HasMaxLength(200)
+                            .HasColumnName("university");
+                    });
         });
 
         OnModelCreatingPartial(modelBuilder);

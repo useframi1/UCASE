@@ -242,3 +242,7 @@
 /Users/youssef/Documents/Spring-2024/Software-Engineering/UCASE/API/bin/Debug/net8.0/AutoMapper.dll
 /Users/youssef/Documents/Spring-2024/Software-Engineering/UCASE/API/bin/Debug/net8.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 /Users/youssef/Documents/Spring-2024/Software-Engineering/UCASE/API/bin/Debug/net8.0/Data/GovernorateSeedData.json
+/Users/youssef/Documents/Spring-2024/Software-Engineering/UCASE/API/bin/Debug/net8.0/Data/SubjectsSeedData.json
+/Users/youssef/Documents/Spring-2024/Software-Engineering/UCASE/API/bin/Debug/net8.0/Data/IndustriesSeedData.json
+/Users/youssef/Documents/Spring-2024/Software-Engineering/UCASE/API/bin/Debug/net8.0/Data/UniversitiesSeedData.json
+/Users/youssef/Documents/Spring-2024/Software-Engineering/UCASE/API/bin/Debug/net8.0/Newtonsoft.Json.dll

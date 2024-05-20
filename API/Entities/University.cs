@@ -23,7 +23,7 @@ public partial class University
 
     public byte[] Logo { get; set; }
 
-    public virtual Governorate Governorate { get; set; }
+    public virtual ICollection<User> Emails { get; set; } = new List<User>();
 
-    public virtual ICollection<Major> MajorNames { get; set; } = new List<Major>();
+    public virtual ICollection<Application> EmailsNavigation { get; set; } = new List<Application>();
 }

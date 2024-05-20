@@ -2,18 +2,12 @@
     <div class="col-lg-6 mt-5">
         <h1 class="fw-bold text-uppercase text-info">login</h1>
         <p class="h5 mt-3"><small class="text-body-secondary">Please login below.</small></p>
-        <form #loginForm="ngForm" class="mt-5" (ngSubmit)="login()">
-            <div class="mb-3">
-                <label for="inputEmail" class="form-label">Email address<span class="text-danger"> *</span></label>
-                <input name="email" [(ngModel)]="model.email" type="email" class="form-control form-control-lg"
-                    id="inputEmail" placeholder="">
-            </div>
-            <div class="mb-5">
-                <label for="inputPassword" class="form-label">Password<span class="text-danger"> *</span></label>
-                <input name="password" [(ngModel)]="model.password" type="password" class="form-control form-control-lg"
-                    id="inputPassword" placeholder="">
-            </div>
-            <button type="submit" class="btn btn-info text-white" id="btnLogin">Login</button>
+        <form [formGroup]="loginForm" class="mt-5" (ngSubmit)="login()">
+            <app-text-input [formControl]="$any(loginForm.controls['email'])" [label]="'Email'"
+                [fieldName]="'Email'"></app-text-input>
+            <app-text-input [formControl]="$any(loginForm.controls['password'])" [label]="'Password'"
+                [fieldName]="'Password'" [type]="'password'"></app-text-input>
+            <button [disabled]="!loginForm.valid" type="submit" class="btn btn-info text-white">Login</button>
         </form>
     </div>
 </div>

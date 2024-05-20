@@ -5,15 +5,17 @@
                 you location.</small></p>
         <form [formGroup]="addressForm" (ngSubmit)="submitAddress()" class="mt-5">
             <app-text-input [formControl]="$any(addressForm.controls['govName'])" [label]="'Governorate'"
-                [list]="governoratesString"></app-text-input>
-            <app-text-input [formControl]="$any(addressForm.controls['area'])" [label]="'Area'"
-                [list]="areas"></app-text-input>
-            <app-text-input [formControl]="$any(addressForm.controls['addressLine1'])"
-                [label]="'Address Line 1'"></app-text-input>
-            <app-text-input [formControl]="$any(addressForm.controls['addressLine2'])"
-                [label]="'Address Line 2'"></app-text-input>
+                [fieldName]="'Governorate'" [typeahead]="governoratesString" [typeaheadScrollable]="true"
+                [typeaheadOptionsInScrollableView]="5"></app-text-input>
+            <app-text-input [formControl]="$any(addressForm.controls['area'])" [label]="'Area'" [fieldName]="'Area'"
+                [typeahead]="areas" [typeaheadScrollable]="true"
+                [typeaheadOptionsInScrollableView]="5"></app-text-input>
+            <app-text-input [formControl]="$any(addressForm.controls['addressLine1'])" [label]="'Address Line 1'"
+                [fieldName]="'Address Line 1'"></app-text-input>
+            <app-text-input [formControl]="$any(addressForm.controls['addressLine2'])" [label]="'Address Line 2'"
+                [fieldName]="'Address Line 1'"></app-text-input>
             <div class="text-end mt-5">
-                <button type="button" class="btn btn-info text-white me-3" routerLink="/details">Previous</button>
+                <button type="button" class="btn btn-info text-white me-3" (click)="goBack()">Previous</button>
                 <button [disabled]="!addressForm.valid" type="submit" class="btn btn-info text-white">Next</button>
             </div>
         </form>

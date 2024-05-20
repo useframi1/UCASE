@@ -40,7 +40,7 @@ const routes: Routes = [
   { path: 'details', component: DetailsComponent },
   { path: 'address', component: AddressComponent },
   { path: 'interests', component: InterestsComponent },
-  { path: 'universities', component: UniversityListComponent },
+  { path: 'university-list', component: UniversityListComponent },
   { path: 'university-details', component: UniversityDetailComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: 'server-error', component: ServerErrorComponent },

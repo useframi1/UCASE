@@ -4,83 +4,26 @@
         <p class="h5 mt-3"><small class="text-body-secondary">This will help us personalize your account, by
                 creating favorites which you can change later. </small><strong><small>These are not application
                     choices.</small></strong></p>
-        <form action="" class="mt-5 needs-validation" novalidate>
-            <div class="mb-4">
-                <label for="inputSubjects" class="form-label">Which subjects are you interested in?<span
-                        class="text-danger">
-                        *</span>
-                </label>
-                <p class="text-secondary">(3 choices remaining)</p>
-                <div class="input-group has-validation">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">Choose</button>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-item">Math</li>
-                        <li class="dropdown-item">Physics</li>
-                        <li class="dropdown-item">Chemistry</li>
-                    </ul>
-                    <input type="text" class="form-control form-control-lg" aria-label="Text input with dropdown button"
-                        required readonly>
-                    <div class="invalid-feedback">
-                        Please choose at least 3 subjects.
-                    </div>
-                </div>
-            </div>
-            <div class="mb-4">
-                <label for="inputUnis" class="form-label">Which universities and colleges are you interested
-                    in?<span class="text-danger">
-                        *</span>
-                </label>
-                <div class="input-group has-validation mb-2">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">Choose</button>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-item">AUC</li>
-                        <li class="dropdown-item">GUC</li>
-                        <li class="dropdown-item">ASU</li>
-                    </ul>
-                    <input type="text" class="form-control form-control-lg" aria-label="Text input with dropdown button"
-                        required readonly>
-                    <div class="invalid-feedback">
-                        Please choose at least 3 subjects.
-                    </div>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">
-                        Unsure
-                    </label>
-                </div>
-            </div>
-            <div class="mb-5">
-                <label for="inputIndustry" class="form-label">Which industries are you interested
-                    in?<span class="text-danger">
-                        *</span>
-                </label>
-                <div class="input-group has-validation mb-2">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">Choose</button>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-item">Engineering</li>
-                        <li class="dropdown-item">Business</li>
-                        <li class="dropdown-item">Medicine</li>
-                    </ul>
-                    <input type="text" class="form-control form-control-lg" aria-label="Text input with dropdown button"
-                        required readonly>
-                    <div class="invalid-feedback">
-                        Please choose at least 3 subjects.
-                    </div>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">
-                        Unsure
-                    </label>
-                </div>
-            </div>
-            <div class="d-flex">
-                <button type="button" class="btn btn-info text-white">Previous</button>
-                <button type="submit" class="btn btn-danger text-white ms-auto">Save and Register</button>
+        <form [formGroup]="interestsForm" (ngSubmit)="submitInterests()" class="mt-5">
+            <app-text-input [formControl]="$any(interestsForm.controls['subject'])"
+                [label]="'Which subjects are you interested in?'" [fieldName]="'Subjects'" [typeahead]="subjects"
+                [typeaheadScrollable]="true" [typeaheadOptionsInScrollableView]="5" [typeaheadMultipleSearch]="true"
+                typeaheadMultipleSearchDelimiters="," [placeholder]="'Ex: Mathematics,Physics...'"></app-text-input>
+
+            <app-text-input [formControl]="$any(interestsForm.controls['university'])" [label]="'Which universities and colleges are you interested
+                in?'" [fieldName]="'Universities'" [typeahead]="universities" [typeaheadScrollable]="true"
+                [typeaheadOptionsInScrollableView]="5" [typeaheadMultipleSearch]="true"
+                typeaheadMultipleSearchDelimiters="," [placeholder]="'Ex: AUC,GUC...'"></app-text-input>
+
+            <app-text-input [formControl]="$any(interestsForm.controls['industry'])" [label]="'Which industries are you interested
+            in?'" [fieldName]="'Industries'" [typeahead]="industries" [typeaheadScrollable]="true"
+                [typeaheadOptionsInScrollableView]="5" [typeaheadMultipleSearch]="true"
+                typeaheadMultipleSearchDelimiters="," [placeholder]="'Ex: Finance,Education...'"></app-text-input>
+
+            <div class="text-end mt-5">
+                <button type="button" class="btn btn-info text-white me-3" (click)="goBack()">Previous</button>
+                <button [disabled]="!interestsForm.valid" type="submit" class="btn btn-danger text-white">Save and
+                    Register</button>
             </div>
         </form>
     </div>

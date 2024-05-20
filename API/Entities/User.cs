@@ -33,9 +33,11 @@ public partial class User
 
     public int? StartUni { get; set; }
 
-    public virtual ICollection<FavoriteUniversity> FavoriteUniversities { get; set; } = new List<FavoriteUniversity>();
+    public virtual Application Application { get; set; }
 
     public virtual ICollection<PreferredIndustry> PreferredIndustries { get; set; } = new List<PreferredIndustry>();
 
     public virtual ICollection<PreferredSubject> PreferredSubjects { get; set; } = new List<PreferredSubject>();
+
+    public virtual ICollection<University> Universities { get; set; } = new List<University>();
 }

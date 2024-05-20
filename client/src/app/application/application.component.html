@@ -1,1 +1,258 @@
-<p>application works!</p>
+<div class="container-fluid mt-5 p-5">
+    <div class="d-flex flex-column">
+        <h1 class="display-5 fw-bold text-uppercase text-info">your application</h1>
+        <p class="lead fs-4">
+            {{member?.startUni}} Undergraduate application
+        </p>
+    </div>
+
+    <div class="card shadow-lg mt-4 bg-light rounded-5 p-2">
+        <div class="card-body">
+            <div class="row align-items-center gy-3">
+                <div class="col-sm">
+                    <h3 class="card-title fw-bold text-dark mb-4">Your application is still in progress</h3>
+                    <progressbar [animate]="false" [value]="progress" type="info" class="rounded-4"
+                        style="height: 30px;">
+                        <b class="fs-5">{{progress}}%</b>
+                    </progressbar>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="my-5">
+        <h3 class="fw-bold text-white mb-3">Your university choices</h3>
+        <button class="btn btn-lg btn-outline-light fw-bold" data-bs-toggle="modal" data-bs-target="#uniModal"><i
+                class="fa fa-plus-circle me-2"></i>Add choice</button>
+        <div class="modal fade" id="uniModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Add university choice</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            (click)="uniChoiceForm.reset()"></button>
+                    </div>
+                    <form [formGroup]="uniChoiceForm" (ngSubmit)="addChosenUniversity()">
+                        <div class="modal-body">
+                            <app-text-input [formControl]="$any(uniChoiceForm.controls['university'])"
+                                [label]="'Which university are you interested in?'" [fieldName]="'Universities'"
+                                [typeahead]="universityNames" [typeaheadScrollable]="true"
+                                [typeaheadOptionsInScrollableView]="5"></app-text-input>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                (click)="uniChoiceForm.reset()">Close</button>
+                            <button [disabled]="!uniChoiceForm.valid" type="submit" class="btn btn-info text-white"
+                                data-bs-dismiss="modal">Save
+                                changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="card rounded-5 p-3 mt-4" data-bs-theme="light"
+            *ngIf="member?.application?.universityChoices?.length">
+            <div class="card-body overflow-y-auto" style="max-height: 30rem;">
+                <div class="row row-cols-lg-1 row-cols-md-1 row-cols-sm-1 row-cols-1 gy-4" id="FavoriteUnis">
+                    <div class="col" *ngFor="let uni of member?.application?.universityChoices; let i = index">
+                        <div class="card border-0" style="max-width: 540px;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="https://picsum.photos/200/200" class="card-img-top rounded-4" alt="..."
+                                        (click)="goToUniPage(i)">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title uni-name" (click)="goToUniPage(i)">{{uni.uniName}}
+                                        </h5>
+                                        <div class="row align-items-start">
+                                            <div class="col">
+                                                <p class="card-text">{{uni.area}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="border-info">
+
+    <div class="my-5">
+        <h3 class="fw-bold text-white mb-3">Profile</h3>
+        <div class="col-md-8">
+            <p class="lead fs-4">
+                We will use your profile information for your application.
+                <strong class="fw-bold"> Make sure you set it up right.</strong>
+            </p>
+        </div>
+        <div class="col-sm-4">
+            <button class="btn btn-info text-white fw-bold" routerLink="/profile">
+                <i class="fa fa-arrow-circle-right me-2"></i>View Profile
+            </button>
+        </div>
+        <div class="row row-cols-1 row-cols-md-4 mt-4 gy-3">
+            <div class="col">
+                <div class="card bg-light shadow-lg rounded-4 border-0 application-card">
+                    <div class="card-body">
+                        <h5 class="card-title text-dark fw-bold">Guardian Info</h5>
+                        <p class="card-text text-secondary">Your guardian's relevant info</p>
+                    </div>
+                    <div class="card-footer btn border border-info border-4 border-bottom-0 border-end-0 border-start-0 rounded-4 rounded-top-0"
+                        [attr.data-bs-toggle]="guardiansFormComplete ? null : 'modal'"
+                        [attr.data-bs-target]="guardiansFormComplete ? null : '#guardianModal'"
+                        [ngClass]="{'btn-info': !guardiansFormComplete, 'disabled': guardiansFormComplete}">
+                        {{guardiansFormComplete ? "You completed this section" : "Start this section"}}
+                    </div>
+
+
+                    <div class="modal fade" id="guardianModal" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5">Add guardian info</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                        (click)="guardianForm.reset()"></button>
+                                </div>
+                                <form [formGroup]="guardianForm" (ngSubmit)="updateGuardianInfo()">
+                                    <div class="modal-body">
+                                        <app-text-input [formControl]="$any(guardianForm.controls['guardianName'])"
+                                            [label]="'Guardian Name'" [fieldName]="'Guardian Name'"></app-text-input>
+                                        <app-text-input [formControl]="$any(guardianForm.controls['guardianEmail'])"
+                                            [label]="'Guardian Email'" [fieldName]="'Guardian Email'"></app-text-input>
+                                        <app-text-input [formControl]="$any(guardianForm.controls['guardianNumber'])"
+                                            [label]="'Guardian Phone Number'" [fieldName]="'Guardian Phone Number'"
+                                            [type]="'tel'"></app-text-input>
+                                        <app-text-input
+                                            [formControl]="$any(guardianForm.controls['guardianProfession'])"
+                                            [label]="'Guardian Profession'"
+                                            [fieldName]="'Guardian Profession'"></app-text-input>
+                                        <app-text-input [formControl]="$any(guardianForm.controls['guardianCompany'])"
+                                            [label]="'Guardian Company'"
+                                            [fieldName]="'Guardian Company'"></app-text-input>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                            (click)="guardianForm.reset()">Close</button>
+                                        <button [disabled]="!guardianForm.valid" type="submit"
+                                            class="btn btn-info text-white" data-bs-dismiss="modal">Save
+                                            changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="border-info">
+
+    <div class="my-5">
+        <h3 class="fw-bold text-white mb-3">Experience</h3>
+        <div class="row row-cols-1 row-cols-md-4 gy-3">
+            <div class="col">
+                <div class="card bg-light shadow-lg rounded-4 border-0 application-card">
+                    <div class="card-body">
+                        <h5 class="card-title text-dark fw-bold">Education</h5>
+                        <p class="card-text text-secondary">Qualifications and study</p>
+                    </div>
+                    <div class="card-footer btn border border-info border-4 border-bottom-0 border-end-0 border-start-0 rounded-4 rounded-top-0"
+                        [attr.data-bs-toggle]="educationFormComplete ? null : 'modal'"
+                        [attr.data-bs-target]="educationFormComplete ? null : '#educationModal'"
+                        [ngClass]="{'btn-info': !educationFormComplete, 'disabled': educationFormComplete}">
+                        {{educationFormComplete ? "You completed this section" : "Start this section"}}
+                    </div>
+
+                    <div class="modal fade" id="educationModal" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5">Add Education info</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                        (click)="educationForm.reset()"></button>
+                                </div>
+                                <form [formGroup]="educationForm" (ngSubmit)="updateEducation()">
+                                    <div class="modal-body">
+                                        <app-text-input [formControl]="$any(educationForm.controls['schoolName'])"
+                                            [label]="'School Name'" [fieldName]="'School Name'"></app-text-input>
+                                        <app-text-input [formControl]="$any(educationForm.controls['schoolCountry'])"
+                                            [label]="'School Country'" [fieldName]="'School Country'"></app-text-input>
+                                        <app-text-input [formControl]="$any(educationForm.controls['schoolCity'])"
+                                            [label]="'School City'" [fieldName]="'School City'"></app-text-input>
+                                        <app-text-input [formControl]="$any(educationForm.controls['yearOfGraduation'])"
+                                            [label]="'Graduation Year'"
+                                            [fieldName]="'Graduation Year'"></app-text-input>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                            (click)="educationForm.reset()">Close</button>
+                                        <button [disabled]="!educationForm.valid" type="submit"
+                                            class="btn btn-info text-white" data-bs-dismiss="modal">Save
+                                            changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card bg-light shadow-lg rounded-4 border-0 application-card">
+                    <div class="card-body">
+                        <h5 class="card-title text-dark fw-bold">Certificates</h5>
+                        <p class="card-text text-secondary">Your school and tests certificates</p>
+                    </div>
+                    <div
+                        class="card-footer btn btn-info border border-4 border-bottom-0 border-end-0 border-start-0 border-info rounded-4 rounded-top-0">
+                        Start this section
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="border-info">
+
+    <div class="my-5">
+        <h3 class="fw-bold text-white mb-3">Personal Statement & Required documents</h3>
+        <div class="row row-cols-1 row-cols-md-4 gy-3">
+            <div class="col">
+                <div class="card bg-light shadow-lg rounded-4 border-0 application-card">
+                    <div class="card-body">
+                        <h5 class="card-title text-dark fw-bold">Personal Statement</h5>
+                        <p class="card-text text-secondary">Why do you want to study there?</p>
+                    </div>
+                    <div
+                        class="card-footer btn btn-info border border-4 border-bottom-0 border-end-0 border-start-0 border-info rounded-4 rounded-top-0">
+                        Start this section
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card bg-light shadow-lg rounded-4 border-0 application-card">
+                    <div class="card-body">
+                        <h5 class="card-title text-dark fw-bold">Required Documents</h5>
+                        <p class="card-text text-secondary">Provide required legal documents</p>
+                    </div>
+                    <div
+                        class="card-footer btn btn-info border border-4 border-bottom-0 border-end-0 border-start-0 border-info rounded-4 rounded-top-0">
+                        Start this section
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col text-center">
+        <button [disabled]="!(progress == 100)" class="btn btn-lg btn-info text-white fw-bold">Submit
+            Application</button>
+    </div>
+
+</div>

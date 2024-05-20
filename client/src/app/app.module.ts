@@ -24,6 +24,8 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { DatePickerComponent } from './_forms/date-picker/date-picker.component';
+import { DatePipe } from '@angular/common';
+import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { DatePickerComponent } from './_forms/date-picker/date-picker.component'
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    DatePipe,
   ],
   bootstrap: [AppComponent],
 })

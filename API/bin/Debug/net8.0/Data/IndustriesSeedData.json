@@ -1,0 +1,35 @@
+[
+    {
+        "industryName": "Agriculture"
+    },
+    {
+        "industryName": "Construction"
+    },
+    {
+        "industryName": "Education"
+    },
+    {
+        "industryName": "Finance"
+    },
+    {
+        "industryName": "Healthcare"
+    },
+    {
+        "industryName": "Information Technology"
+    },
+    {
+        "industryName": "Manufacturing"
+    },
+    {
+        "industryName": "Mining"
+    },
+    {
+        "industryName": "Retail"
+    },
+    {
+        "industryName": "Transportation"
+    },
+    {
+        "industryName": "Utilities"
+    }
+]

@@ -3,15 +3,16 @@
         <h1 class="fw-bold text-uppercase text-info">register</h1>
 
         <form [formGroup]="registerForm" (ngSubmit)="register()" class="mt-3">
-            <app-text-input [formControl]="$any(registerForm.controls['email'])" [label]="'Email'"></app-text-input>
-            <app-text-input [formControl]="$any(registerForm.controls['firstName'])"
-                [label]="'First Name'"></app-text-input>
-            <app-text-input [formControl]="$any(registerForm.controls['lastName'])"
-                [label]="'Last Name'"></app-text-input>
+            <app-text-input [formControl]="$any(registerForm.controls['email'])" [label]="'Email'"
+                [fieldName]="'Email'"></app-text-input>
+            <app-text-input [formControl]="$any(registerForm.controls['firstName'])" [label]="'First Name'"
+                [fieldName]="'First Name'"></app-text-input>
+            <app-text-input [formControl]="$any(registerForm.controls['lastName'])" [label]="'Last Name'"
+                [fieldName]="'Last Name'"></app-text-input>
             <app-text-input [formControl]="$any(registerForm.controls['password'])" [label]="'Password'"
-                [type]="'password'"></app-text-input>
+                [fieldName]="'Password'" [type]="'password'"></app-text-input>
             <app-text-input [formControl]="$any(registerForm.controls['confirmPassword'])" [label]="'Confirm Password'"
-                [type]="'password'"></app-text-input>
+                [fieldName]="'Confirm Password'" [type]="'password'"></app-text-input>
 
             <div class="text-end">
                 <button [disabled]="!registerForm.valid" type="submit" class="btn btn-info text-white">Continue</button>

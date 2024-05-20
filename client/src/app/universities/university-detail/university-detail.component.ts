@@ -1,23 +1,55 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import * as L from 'leaflet';
+import { University } from 'src/app/_models/university';
+import { DataService } from 'src/app/_services/data.service';
 
 @Component({
   selector: 'app-university-detail',
   templateUrl: './university-detail.component.html',
   styleUrls: ['./university-detail.component.css'],
 })
-export class UniversityDetailComponent implements OnInit {
+export class UniversityDetailComponent implements OnInit, OnDestroy {
   map: any;
+  uniData: University | undefined;
+  lat: any;
+  long: any;
 
-  initMap(): void {
-    this.map = L.map('map').setView([51.505, -0.09], 13);
+  constructor(private dataService: DataService) {}
+
+  ngOnInit(): void {
+    var uniDataString = localStorage.getItem('uniData');
+    if (!uniDataString) return;
+    this.uniData = JSON.parse(uniDataString);
+    this.initMap();
+  }
+
+  ngOnDestroy(): void {
+    localStorage.removeItem('uniData');
+  }
+
+  initMap() {
+    this.dataService.getGeocodeData(this.uniData?.uniName!).subscribe({
+      next: (response) => {
+        if (response.status === 'OK') {
+          const location = response.results[0].geometry.location;
+          this.lat = location.lat;
+          this.long = location.lng;
+          this.setMap();
+        }
+      },
+    });
+  }
+
+  setMap(): void {
+    this.map = L.map('map').setView([this.lat, this.long], 16);
 
     L.tileLayer('https://tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.map);
 
-    L.marker([51.5, -0.09], {
+    L.marker([this.lat, this.long], {
       icon: L.icon({
         iconUrl: 'assets/leaflet/marker-icon.png',
         shadowUrl: 'assets/leaflet/marker-shadow.png',
@@ -31,11 +63,5 @@ export class UniversityDetailComponent implements OnInit {
     })
       .addTo(this.map)
       .openPopup();
-  }
-
-  constructor() {}
-
-  ngOnInit(): void {
-    this.initMap();
   }
 }

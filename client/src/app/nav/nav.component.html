@@ -8,16 +8,13 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav ms-0 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/universities" routerLinkActive="active">Universities</a>
+                    <a class="nav-link" routerLink="/university-list" routerLinkActive="active">Universities</a>
                 </li>
             </ul>
 
             <ul class="navbar-nav ms-0 mb-2 mb-lg-0" *ngIf="accountService.currentUser$ | async">
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/hub" routerLinkActive="active">My Hub</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/application" routerLinkActive="active">My Application</a>
                 </li>
             </ul>
 
@@ -30,7 +27,7 @@
                             width="30" /> Welcome, <span class="text-capitalize">{{user.firstName}}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right" *dropdownMenu>
-                        <li><a class="dropdown-item">Edit Profile</a></li>
+                        <li><a class="dropdown-item" routerLink="/profile">Edit Profile</a></li>
                         <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
                     </ul>
                 </li>

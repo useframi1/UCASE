@@ -1,0 +1,10 @@
+.user-avatar {
+  margin: 0 0 1rem 0;
+}
+.user-avatar img {
+  width: 120px;
+  height: 120px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  border-radius: 100px;
+}

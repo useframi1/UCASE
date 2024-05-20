@@ -27,6 +27,7 @@ public class UsersController : BaseApiController
         return Ok(users);
     }
 
+
     [HttpGet("{email}")]
     public async Task<ActionResult<MemberDto>> GetUser(string email)
     {
@@ -62,5 +63,37 @@ public class UsersController : BaseApiController
         _userRepository.Update(user);
 
         return await _userRepository.SaveAllAsync();
+    }
+
+    [HttpPut("updateInterests")]
+    public async Task<ActionResult<bool>> UpdateUserInterests(InterestsDto interestsDto)
+    {
+        return await _userRepository.UpdateFavoriteUniversitiesAsync(interestsDto.Email, interestsDto.Universities)
+            && await _userRepository.UpdatePreferredIndustriesAsync(interestsDto.Email, interestsDto.Industries)
+            && await _userRepository.UpdatePreferredSubjectsAsync(interestsDto.Email, interestsDto.Subjects);
+    }
+
+    [HttpPut("editProfile")]
+    public async Task<ActionResult<bool>> EditProfile(ProfileDto profileDto)
+    {
+        return await _userRepository.EditProfileAsync(profileDto);
+    }
+
+    [HttpGet("recommendedUnis")]
+    public async Task<ActionResult<IEnumerable<UniversityDto>>> GetRecommendedUnis(string email)
+    {
+        return Ok(await _userRepository.GetRecommendedUniversitiesAsync(email));
+    }
+
+    [HttpPut("updateGuardianInfo")]
+    public async Task<ActionResult<bool>> UpdateGuardianInfo(GuardianInfoDto guardianInfoDto)
+    {
+        return await _userRepository.UpdateGuardianInfoAsync(guardianInfoDto);
+    }
+
+    [HttpPut("updateEducation")]
+    public async Task<ActionResult<bool>> UpdateEducation(EducationDto educationDto)
+    {
+        return await _userRepository.UpdateEducationAsync(educationDto);
     }
 }
